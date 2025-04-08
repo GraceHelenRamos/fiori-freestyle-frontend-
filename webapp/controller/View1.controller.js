@@ -1,51 +1,62 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageToast"
+    "sap/ui/model/json/JSONModel"
+
 ],
-    /** passar toas as classe que vc vai utilizar dentro desse controler
+    /** passar todas as classe que vc vai utilizar dentro desse controler
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageToast) { // aqui nos () deve conter dodas as classes sap que forão declaradas da linha 2 para baixo  colocando o nome do final dela 
+    function (Controller, JSONModel) { // aqui nos () deve conter dodas as classes sap que forão declaradas da linha 2 para baixo  colocando o nome do final dela 
         "use strict";
 
         return Controller.extend("zov.controller.View1", {
             onInit: function () {
-//debugger;
-            },
-            onPress: function () {
-                alert("Hello word");
-            },
-            onBeforeRendering: function () {
-                //alert("onBeforeRendering");
-            },
-
-            onAfterRendering: function () {
-                //alert("onAfterRendering");
-            },
-
-            onExit: function () {
-                //alert("onExit");
+             /*   // model padrão da view
+                var oView  = this.getView();
+                var oModel = new sap.ui.model.json.JSONModel();
+                oModel.setData({"usuario": {"nome": "Vinicius"}});
+                oView.setModel(oModel);*/
+                
+                debugger;
+                // model com o nome "dados"
+                var oView  = this.getView();
+                var oModel = new sap.ui.model.json.JSONModel();
+                oModel.setData({"usuario": {"nome": "José"}});
+                oView.setModel(oModel,"dados");
             },
 
-            onCalcular: function () {
-                var oView = this.getView();//por padrão iniciar com o nome do que vc está referenciando nesse caso objeto = o
-                var iB1 = parseInt(oView.byId("b1").getValue());//i de input + o id dele
-                var iB2 = parseInt(oView.byId("b2").getValue());
-                var iB3 = parseInt(oView.byId("b3").getValue());
-                var iB4 = parseInt(oView.byId("b4").getValue());
-                var fResultado = 0;
+            onTestModels: function(){
+                // model i18n
+                var oI18n = this.getView().getModel("i18n").getResourceBundle();
+                var sText = oI18n.getText("title");
 
-                fResultado = (iB1 + iB2 + iB3 + iB4) / 4;
+                console.log("Texto com a chave 'title'");
+                console.log(sText);
 
-                oView.byId("resultado").setValue(fResultado);
+                console.log("------------------------------------------");
 
-                MessageToast.show("Resultado = " + fResultado); //jogando o camppo de resultado na tela pegando o id da view
+                // model de usuários
+                var oModel = this.getOwnerComponent().getModel("usuarios");
+                var oData = oModel.getData();
+                console.log("Model dos usuários")
+                console.log(oData);
 
-                // MessageToast
-                // sap.m.MessageToast
+                console.log("------------------------------------------");
 
-                //oView.destroy();
+                // model do serviço
+                var oModel = this.getOwnerComponent().getModel();
+                oModel.read("/OVCabSet",{
+                   
+                    success: function(oData, oResponse){ 
+                        debugger;
+                        console.log("Dados retornados do serviço")
+                        console.log(oData);
+                        console.log(oResponse);
+                    },
+                    error: function(oError){
+                        console.log(oError);
+                    }
+                });
             }
-
         });
     });
