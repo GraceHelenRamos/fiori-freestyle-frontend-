@@ -1,9 +1,9 @@
-sap.ui.define([
+/*sap.ui.define([
     "sap/ui/core/mvc/Controller",
 ],
     /** passar todas as classe que vc vai utilizar dentro desse controler 
      * * @param {typeof sap.ui.core.mvc.Controller} Controller
-   */  
+    
     function (Controller) {
         "use strict";
 
@@ -43,4 +43,5 @@ sap.ui.define([
 
         });
     });
+    */
     

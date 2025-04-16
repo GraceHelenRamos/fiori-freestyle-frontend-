@@ -1,12 +1,21 @@
 <mvc:View controllerName="zov.controller.View1"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns:core="sap.ui.core"
-    xmlns:t="sap.ui.table"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-      <VBox class="sapUiTinyMargin">
-        <Button text="Novo Cliente" press="onNewCustomer"/>
-        <Button text="Modificar Cliente 1" press="onEditCustomer1"/>
-      </VBox>
-    </Page>
+  xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+  xmlns:core="sap.ui.core"
+  xmlns:t="sap.ui.table"
+  xmlns="sap.m">
+  <Page id="page" title="{i18n>title}">
+    <VBox class="sapUiTinyMargin">
+      <Label text="Ultima Ordem Criada" />
+      <Input text="" id="lastOrdemId" editable="false" />
+      <TextArea id="textarea1" value="" rows="8" width="100%" editable="false" />
+    </VBox>
+
+<HBox class="sapUiTinyMargin">
+   <Button text="Criar OV" press="onCreateOVCab" />
+   <Button text="Criar Ov (Deep)" press="onCreateDeepOVCab" />
+   <Button text="Ler Ov" press="onReadOVCab" />
+   <Button text="Atualizar OV" press="onUpdatedOVCab" />
+   <Button text="Deletar Ov" press="onDeleteOVCab" />  
+</HBox>
+  </Page>
 </mvc:View>
